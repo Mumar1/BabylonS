@@ -27,7 +27,8 @@ function init(){
 
           // create a basic light, aiming 0,1,0 - meaning, to the sky
           var light = new BABYLON.HemisphericLight('light1', new BABYLON.Vector3(1,0,0), scene);
-
+          var light = new BABYLON.HemisphericLight('light1', new BABYLON.Vector3(0,0,1), scene);
+          var light = new BABYLON.HemisphericLight('light1', new BABYLON.Vector3(0,1,0), scene);
           scene = createSphere(scene, 1000, 100, 100);
           //scene = createDonut(scene, 12, 24, 24);
           //scene = createCube(scene, 5);
@@ -57,7 +58,6 @@ function init(){
 * Prepare the sphere vertices so it can be added to the scene.
 */
 function createSphere(scene, radius, stacks, slices){
-
   //Create Sphere
   var allStackVertex = Sphere(radius, stacks, slices);
 
@@ -73,14 +73,14 @@ function createSphere(scene, radius, stacks, slices){
 
 	var mat = new BABYLON.StandardMaterial("texture1", scene);
     mat.diffuseTexture = new BABYLON.Texture("/images/earth.jpg", scene);
-  	mat.backFaceCulling = true;
+  	mat.backFaceCulling = false;
   	mat.wireframe = false;
   var ribbon = BABYLON.Mesh.CreateRibbon("ribbon", vertices, false, true, 0, scene);
   	ribbon.material = mat;
 
   console.log(allStackVertex);
-  var uvs = getSphereUV(vertices);
-  console.log(uvs);
+  //var uvs = getSphereUV(vertices);
+  //console.log(uvs);
 
   return scene;
 }
@@ -150,7 +150,6 @@ function createCube(scene, size){
 * Prepare the sphere vertices so it can be added to the scene.
 */
 function createDonut(scene, radius, stacks, slices){
-
   var allStackVertex = Donut(radius, stacks, slices);
 
   //Convert vertices to Babylon vertex.
